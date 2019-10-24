@@ -31,11 +31,12 @@ public class MainActivity extends AppCompatActivity {
     }
     public boolean onOptionsItemSelected(MenuItem item) {
         String st=item.getTitle().toString();
-        if (st.equals("menuone")){
-        }
-        if (st.equals("menutwo")){}
         if (st.equals("Gallery")){
-            Intent gotogal=new Intent(this,Gallery.class );
+            Intent gotogal = new Intent(this, Gallery.class);
+            startActivity(gotogal);
+        }
+        if (st.equals("Update")) {
+            Intent gotogal = new Intent(this, Update.class);
             startActivity(gotogal);
         }
         return super.onOptionsItemSelected(item);
