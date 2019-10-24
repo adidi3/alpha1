@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         if (st.equals("menuone")){
         }
         if (st.equals("menutwo")){}
-        if (st.equals("menuthree")){
+        if (st.equals("Gallery")){
             Intent gotogal=new Intent(this,Gallery.class );
             startActivity(gotogal);
         }
