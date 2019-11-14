@@ -27,6 +27,8 @@ public class Update extends AppCompatActivity implements AdapterView.OnItemClick
     // Write a message to the database
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     ListView lv1;
+    EditText et;
+    String nd;
     LinearLayout dialog;
     ArrayList<String> stringList = new ArrayList<String>();
     ArrayAdapter<String> adapter;
@@ -39,6 +41,7 @@ public class Update extends AppCompatActivity implements AdapterView.OnItemClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update);
         lv1=(ListView) findViewById(R.id.listv);
+        et=(EditText) findViewById(R.id.editText);
         lv1.setOnItemClickListener(this);
         lv1.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         ArrayAdapter<String> adp=new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item);
@@ -47,11 +50,16 @@ public class Update extends AppCompatActivity implements AdapterView.OnItemClick
 
 
     public void EnterData(View view) {
-        myRef.setValue("Hello World");
+        nd=et.getText().toString();
+        // rtdb step 4:
+        myRef.child(nd).setValue(nd);
+        Toast.makeText(this, "Writing succeeded", Toast.LENGTH_SHORT).show();
+        et.setText("");
+
     }
 
     @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long id) {
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 
         dialog = (LinearLayout) getLayoutInflater().inflate(R.layout.dialogx, null);
         ad = new AlertDialog.Builder(this);
