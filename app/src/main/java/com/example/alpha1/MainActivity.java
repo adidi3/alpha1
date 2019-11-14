@@ -32,11 +32,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         tphone=(EditText)findViewById(R.id.phone);
         tmail=(EditText)findViewById(R.id.mail);
+
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
-
     }
 
     private void updateUI(FirebaseUser currentUser) {
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
     public boolean onOptionsItemSelected(MenuItem item) {
         //menu
         String st=item.getTitle().toString();
@@ -64,8 +66,7 @@ public class MainActivity extends AppCompatActivity {
     public void EnterData(View view) {
         email=tmail.getText().toString();
         password=tphone.getText().toString();
-        // private void updateUI(FirebaseUser currentUser) {
-        mAuth.createUserWithEmailAndPassword(email, password)
+        mAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -76,7 +77,9 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, "Authentication succedded.",
                                     Toast.LENGTH_SHORT).show();
                             updateUI(user);
-                        } else {
+                        }
+
+                        else {
                             // If sign in fails, display a message to the user.
                             Log.w("MainActivity", "createUserWithEmail:failure", task.getException());
                             Toast.makeText(MainActivity.this, "Authentication failed.",
@@ -85,9 +88,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
-
-        // fire base step 4
-
 
     }
 }

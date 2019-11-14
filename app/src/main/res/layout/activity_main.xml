@@ -26,13 +26,15 @@
             android:layout_weight="0.4" />
 
         <EditText
-            android:id="@+id/phone"
+            android:id="@+id/mail"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:ems="10"
+            android:hint="mail"
             android:textStyle="bold"
-            android:inputType="textEmailAddress" />
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            />
 
         <Space
             android:layout_width="0dp"
@@ -56,15 +58,17 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.4" />
-
         <EditText
-            android:id="@+id/mail"
+            android:id="@+id/phone"
+            android:hint="phone"
+            android:inputType="phone"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textStyle="bold"
             android:ems="10"
-            android:inputType="phone" />
+            android:textStyle="bold"
+            />
+
 
         <Space
             android:layout_width="0dp"
