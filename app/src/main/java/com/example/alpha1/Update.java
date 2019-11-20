@@ -1,5 +1,6 @@
 package com.example.alpha1;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,8 +17,11 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -31,7 +35,7 @@ public class Update extends AppCompatActivity implements AdapterView.OnItemClick
     String nd;
     LinearLayout dialog;
     ArrayList<String> stringList = new ArrayList<String>();
-    ArrayAdapter<String> adapter;
+    ArrayAdapter<String> adp;
     AlertDialog.Builder ad;
 
 
@@ -44,22 +48,43 @@ public class Update extends AppCompatActivity implements AdapterView.OnItemClick
         et=(EditText) findViewById(R.id.editText);
         lv1.setOnItemClickListener(this);
         lv1.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        ArrayAdapter<String> adp=new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item);
+        adp=new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item);
         lv1.setAdapter(adp);
     }
 
 
     public void EnterData(View view) {
-        nd=et.getText().toString();
+        nd = et.getText().toString();
         // rtdb step 4:
         myRef.child(nd).setValue(nd);
         Toast.makeText(this, "Writing succeeded", Toast.LENGTH_SHORT).show();
         et.setText("");
+        ValueEventListener mrListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot ds) {
+                stringList.clear();
+                for (DataSnapshot data : ds.getChildren()){
+                    String tmp=data.getValue(String.class);
+                    stringList.add(tmp);
+                }
+                adp = new ArrayAdapter<String>(Update.this,R.layout.support_simple_spinner_dropdown_item, stringList);
+                lv1.setAdapter(adp);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        };
+        myRef.addValueEventListener(mrListener);
+
+
 
     }
 
+
     @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+    public void onItemClick(AdapterView<?> adapterView, View view, final int position, long id) {
 
         dialog = (LinearLayout) getLayoutInflater().inflate(R.layout.dialogx, null);
         ad = new AlertDialog.Builder(this);
@@ -68,7 +93,7 @@ public class Update extends AppCompatActivity implements AdapterView.OnItemClick
         ad.setView(dialog);
         ad.setPositiveButton("confirm", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int position) {
+            public void onClick(DialogInterface dialogInterface, int i) {
                 String str= stringList.get(position);
                 myRef.child(str).removeValue();
                 Toast.makeText(Update.this, "Deleting succeeded", Toast.LENGTH_SHORT).show();
