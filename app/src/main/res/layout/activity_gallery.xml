@@ -7,8 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".Gallery">
 
-
-    <Space
+        <Space
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.8" />
@@ -49,11 +48,11 @@
             android:layout_weight="0.5"/>
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/button1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Button" />
+            android:text="Upload Image" />
 
         <Space
             android:layout_width="0dp"
@@ -62,6 +61,30 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.8"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"/>
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Download Image" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5" />
+
+    </LinearLayout>
 
 
     <Space

@@ -29,7 +29,6 @@ import static com.example.alpha1.FBref.myRef;
 
 public class Update extends AppCompatActivity implements AdapterView.OnItemClickListener {
     // Write a message to the database
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
     ListView lv1;
     EditText et;
     String nd;
@@ -48,7 +47,7 @@ public class Update extends AppCompatActivity implements AdapterView.OnItemClick
         et=(EditText) findViewById(R.id.editText);
         lv1.setOnItemClickListener(this);
         lv1.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        adp=new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item);
+        adp=new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item, stringList);
         lv1.setAdapter(adp);
     }
 
@@ -84,7 +83,7 @@ public class Update extends AppCompatActivity implements AdapterView.OnItemClick
 
 
     @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, final int position, long id) {
+    public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
 
         dialog = (LinearLayout) getLayoutInflater().inflate(R.layout.dialogx, null);
         ad = new AlertDialog.Builder(this);
