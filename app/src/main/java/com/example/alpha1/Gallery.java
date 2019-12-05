@@ -146,6 +146,7 @@ public class Gallery extends AppCompatActivity {
         }
     }
 
+    
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
